@@ -1,0 +1,13 @@
+[package]
+name = "dunder_mifflin"
+version = "99.0.37"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "dunder_mifflin"
+# crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pyo3 = "0.27.1"
