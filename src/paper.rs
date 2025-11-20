@@ -1,6 +1,6 @@
 use pyo3::{exceptions::PyValueError, prelude::*};
 
-use crate::employees::EmployeeList;
+use crate::employees::{Employee, EmployeeList};
 
 /// A single sheet of paper that can be placed into the Shredder
 #[pyclass]
@@ -63,35 +63,26 @@ impl Paper {
     /// adding these papers to the inbox of these employees
     /// defaults to sending to everyone in the office
     #[pyo3(signature = (office, emails_opt=None))]
-    pub fn fax(&self, office: EmployeeList, emails_opt: Option<Vec<String>>) -> EmployeeList { 
-        // let employee_emails = office.iter().map(|employee| {
-        //     employee.email()
-        // }).collect();
-
+    pub fn fax(&self, py: Python<'_>, office: Vec<Py<Employee>>, emails_opt: Option<Vec<String>>) { 
         if let Some(emails) = emails_opt { 
             // if emails are specified, just send to those employees
+            for employee_handle in office {
 
-            // emails.iter.for_each(|address| {
-            //
-            //     if employee_emails.contains(address) {
-            //         employee.send(paper.clone()) 
-            //
-            //     }
-            // })
-            // this way would be simpler and excludes the above error case
-            // but we want to have the error case :P
-            office.clone().iter_mut().map(|employee| { 
-                if emails.contains(&employee.email()) { 
-                    employee.send(self.clone()) 
+                // We borrow the Rust struct *inside* the Python object mutably
+                let mut employee_ref = employee_handle.borrow_mut(py);
+                if emails.contains(&employee_ref.email()) { 
+                    // Perform the mutation
+                    employee_ref.send(self.clone());
                 } 
-                employee.clone()
-            }).collect()
+            }
         } else {
-            // else just send to everyone in the office
-            office.clone().iter_mut().map(|employee| { 
-                employee.send(self.clone());
-                employee.clone()
-            }).collect() 
+            for employee_handle in office {
+                // We borrow the Rust struct *inside* the Python object mutably
+                let mut employee_ref = employee_handle.borrow_mut(py);
+                
+                // Perform the mutation
+                employee_ref.send(self.clone());
+            }
         }
     } 
 }
