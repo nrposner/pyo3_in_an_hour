@@ -55,9 +55,9 @@ fn example_function(
 ) -> Vec<f64> {
     example_vec.iter().map(|u| {
         if multiply {
-            u as f64 * example_int as f64
+            *u as f64 * example_int as f64
         } else {
-            u as f64 / example_int as f64
+            *u as f64 / example_int as f64
         }
     }).collect()
 }

@@ -20,7 +20,7 @@ pub struct Employee {
 }
 
 impl Employee { 
-    pub fn new(id: DunderMifflinId, name: &str, email: &str, michaels_notes: &str) -> Self { 
+    pub fn new(id: DunderMifflinId, name: String, email: &str, michaels_notes: &str) -> Self { 
         Self { 
             id,
             name: name.to_string(), 
@@ -46,7 +46,7 @@ impl Employee {
     //     Employee::new(id, name, email, michaels_notes) 
     // }
     pub fn __init__(id: u32, name: String, email: String, michaels_notes: String) -> Self { 
-        Employee::new(id, &name, &email, &michaels_notes) 
+        Employee::new(id, name, &email, &michaels_notes) 
     }
     pub fn inbox(&self) -> HashSet<String> {
         self.inbox.clone()

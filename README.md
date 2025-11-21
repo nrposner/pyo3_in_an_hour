@@ -46,6 +46,44 @@ With this, you can mostly replicate the experience of using structs in Python
 
 Actually, one of the later challenges should be Dwight trying to just arbitrarily change pyclass contents, and you need to stop him from doing that.
 
+
+or maybe the outline is more like
+
+## Basics
+
+### PyClasses
+
+### Pyfunctions
+
+### Mutation of Python-side data with 
+
+## Customization and Ergonomics
+
+### Python-side ergonomics
+
+### Display/Debug with __str__ and __repr__
+
+### Iteration
+
+### Containment
+
+### 
+
+## Defensive Programming in Rust-Python
+
+### Using \_\_slots\_\_ to prevent arbitrary Python class additions
+
+### Using dunders to make existing fields private
+
+## Calling Python from Rust
+
+### Raw inline Python
+
+### include external files
+
+### include external libraries/wheels?
+
+
 ## Make PyFunctions available
 
 ## Customize PyClasses with dunder methods for ergonomics

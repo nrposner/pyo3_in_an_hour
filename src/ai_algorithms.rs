@@ -1,19 +1,19 @@
 use pyo3::{prelude::*, types::{IntoPyDict, PyModule}};
 use std::ffi::CString;
 
-use crate::{employees::{Employee, EmployeeList}, paper::{Paper, PaperSize, PaperType}};
+use crate::{employees::{Employee, EmployeeList}, paper::{Paper, PaperSize}};
 
 
 fn test_algorithms() -> Result<(), String> {
 
-    let paper = Paper::new(PaperType::Nice(0), PaperSize::new(6, 8), String::from("bla"));
+    let paper = Paper::new(PaperSize::new(6, 8), String::from("bla"));
 
     let employees = EmployeeList::from( 
         [ 
-            Employee::new(1, "Michael", "mscott@dundermifflin.com", "the best"), 
-            Employee::new(0, "Dwight", "dschrute@dundermifflin.com", "horrible"),
-            Employee::new(2, "Pam", "pbeesly@dundermifflin.com", "PAM!"),
-            Employee::new(3, "Jim", "jhalpert@dundermifflin.com", "lazy"),
+            Employee::new(1, "Michael".to_string(), "mscott@dundermifflin.com", "the best"), 
+            Employee::new(0, "Dwight".to_string(), "dschrute@dundermifflin.com", "horrible"),
+            Employee::new(2, "Pam".to_string(), "pbeesly@dundermifflin.com", "PAM!"),
+            Employee::new(3, "Jim".to_string(), "jhalpert@dundermifflin.com", "lazy"),
         ]
     );
 

@@ -70,7 +70,7 @@ impl ExampleClass {
     }
 }
 
-// a plural!
+// methods available from Python as well
 #[pymethods]
 impl ExampleClass {
     pub fn bar(&self) {

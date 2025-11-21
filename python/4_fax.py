@@ -1,5 +1,6 @@
-# a series of tests for stage 1 of the workshop
-# establishing the basics of modules and exports
+
+# establishing some more involved elements, introducing the Py<> smart pointer for 
+# mutation of Python data
 import pytest
 from dunder_mifflin import Paper, Employee #ty: ignore[unresolved-import]
 
@@ -8,7 +9,6 @@ from dunder_mifflin import Paper, Employee #ty: ignore[unresolved-import]
 def test_fax_1():
     try:
         v_important_paper = Paper(
-            "supernice", 
             10, 12, 
             "When I was but a young lad, my father said to me..."
         )
@@ -49,9 +49,8 @@ def test_fax_1():
 def test_fax_2():
     try:
         stanleys_art = Paper(
-            "supernice", 
             10, 12, 
-            "When I was but a young lad, my father said to me..."
+            "[CENSORED]"
         )
         employees = [
             Employee(1, "Michael", "mscott@dundermifflin.com", "the best"), 
