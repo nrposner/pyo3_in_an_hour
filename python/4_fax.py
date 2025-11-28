@@ -1,6 +1,3 @@
-
-# establishing some more involved elements, introducing the Py<> smart pointer for 
-# mutation of Python data
 import pytest
 from dunder_mifflin import Paper, Employee #ty: ignore[unresolved-import]
 

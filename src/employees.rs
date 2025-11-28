@@ -4,18 +4,15 @@ use pyo3::prelude::*;
 
 use crate::paper::Paper;
 
-pub type EmployeeList = Vec<Employee>;
-
 type DunderMifflinId = u32;
 
-#[derive(Clone)]
 #[pyclass]
+#[derive(Clone)]
 pub struct Employee { 
     id: DunderMifflinId,
     name: String, 
     email: String, 
     michaels_notes: String,
-    // inbox: HashSet<Paper>
     inbox: HashSet<String>
 }
 
@@ -30,26 +27,25 @@ impl Employee {
         } 
     }
     pub fn send(&mut self, paper: Paper) {
-        // no need for the bool here
         self.inbox.insert(paper.contents());
     }
-    pub fn email(&self) -> String {
-        self.email.clone()
-    }
+    pub fn id(&self) -> u32 { self.id }
+    // pub fn name(&self) -> String { self.name.clone() }
+    // pub fn email(&self) -> String { self.email.clone() }
+    pub fn notes(&self) -> String { self.michaels_notes.clone() }
 }
 
 
 #[pymethods]
 impl Employee {
     #[new]
-    // pub fn __init__(id: u32, name: &str, email: &str, michaels_notes: &str) -> Self { 
-    //     Employee::new(id, name, email, michaels_notes) 
-    // }
     pub fn __init__(id: u32, name: String, email: String, michaels_notes: String) -> Self { 
         Employee::new(id, name, &email, &michaels_notes) 
     }
     pub fn inbox(&self) -> HashSet<String> {
         self.inbox.clone()
     }
+    pub fn name(&self) -> String { self.name.clone() }
+    pub fn email(&self) -> String { self.email.clone() }
 }
 

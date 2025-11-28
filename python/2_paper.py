@@ -15,15 +15,14 @@ def jim_paper_1():
         print("Test #1 Succeeded Correctly\n✅")
         print("Who wrote that!? - Michael")
     except ValueError as ve:
-
         print(f"Test #1\n❌ Received ValueError{ve}. \nConsider checking the valid input types of Paper")
-        print(f"\nWhy isn't this working? - Dwight")
+        print(f"\nWhy isn't this working? - Jim")
     except TypeError as te:
         print(f"Test #1 Failed Incorrectly\n❌ Received ValueError{te}. \nConsider checking the input types of Paper")
-        print(f"\nWhat do you mean 'Paper doesn't exist?! - Dwight")
+        print(f"\nWhat do you mean 'Paper doesn't exist?! - Jim")
     except Exception as e:
         print(f"Test #1 Failed Incorrectly\n❌ Got unexpected error type {type(e).__name__}. \nConsider asking for help")
-        print(f"\nCome on, stupid machine. Just print! - Dwight")
+        print(f"\nCome on, stupid machine. Just print! - Jim")
         
 # Dwight is trying to make a paper, but wrong... or is he?
 # This is a judgment call: you could accept negative dimensions as inputs and coerce them into positive dimensions... or you could leave this as an error and try passing back a more informative error message
@@ -31,16 +30,19 @@ def jim_paper_1():
 def dwight_paper_2():
     try:
         # should fail
-        p = Paper(-6, 8, "Michael sux")
+        p = Paper(-6, 8, "NEW OFFICE RULES")
+
+        print(f"\nTest #2 Succeeded... Correctly?\n ✅")
+        print("See? I told you it would work! - Dwight")
     except OverflowError as oe:
-        print(f"\nTest #2 Failed... Correctly?\n ✅ {oe}")
+        print(f"\nTest #2 Failed... Correctly?\n ❌ {oe}")
         print("It's negative width, so it should just be wide to the left! What's so hard about this? - Dwight")
-    # except Warning as w:
-    #     print(f"\nTest #2 Failed... Correctly?\n ✅ {w}")
-    #     print("Why is this a warning! It should be a hard error! - Michael")
+    except ValueError as ve:
+        print(f"\nTest #2 Failed... Correctly?\n ✅ {ve}")
+        print("Maybe you should listen to the computer, Dwight. - Michael")
     except Exception as e:
         print(f"\nTest #2 Failed Incorrectly \n❌ Expected OverflowError or Warning, but got {type(e).__name__}.")
-        print(f"\nWhy is our fax machine segfaulting? - Michael")
+        print(f"\nDwight, why is our fax machine segfaulting? - Michael")
 
 
 if __name__ == "__main__":

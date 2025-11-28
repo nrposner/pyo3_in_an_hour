@@ -34,14 +34,9 @@ enum ExampleEnum {
 
 With PyO3, Rust structs and enums can be marked as Python classes simply by using the `#[pyclass]` attribute macro. For simple structs and enums like those above, which are composed entirely of standard library types with Python equivalents, this is all that is necessary.
 
-Under the hood, PyO3 is deriving the `FromPyObject` and `IntoPyObject` traits: this can be done trivially for 
-
+Under the hood, PyO3 is deriving the `FromPyObject` and `IntoPyObject` traits: this can be done trivially for most classes which are composed of simple types with equivalents in Python, but may need to be implemented manually in other cases.
 
 Note that, at present, PyO3 does not support deriving FromPyObject or IntoPyObject for empty structs or enum variants.
 
 
 
-
-
-***
-How does subclassing from a Rust-defined python class work??

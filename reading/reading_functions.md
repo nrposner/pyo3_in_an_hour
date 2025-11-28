@@ -1,4 +1,4 @@
-# Stage 1
+# Stage 2
 
 Python classes are a convenient way to wrap around Rust structs and impl methods, but this isn't Java: we've got free-floating functions!
 
@@ -23,7 +23,6 @@ example_class = ExampleClass.new(...)
 
 ## Creating a PyFunction from Rust
 
-
 You can make an existing Rust function available from Python using the `#[pyfunction]` attribute macro.
 
 ```rust
@@ -35,14 +34,11 @@ fn example_function() {}
 
 As with PyClasses, this does not need to be a public function so long as it's in the same file as the python module.
 
-
-
 ## Writing Effective PyFunctions
 
 The key concern when writing PyFunctions in Rust, beyond the usual considerations for writing Rust functions, is how receive inputs from Python and how to return outputs to it.
 
 If you're dealing with common primitive types shared by both Python and Rust, such as strings, integers and floats, booleans, and simple collections, then you can just pass them around directly. Much like Python itself, it's not the most optimized way to do this, but it's easy.
-
 
 ```rust
 use pyo3::prelude::*;

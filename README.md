@@ -55,7 +55,7 @@ or maybe the outline is more like
 
 ### Pyfunctions
 
-### Mutation of Python-side data with 
+### Mutation of Python-side data with `Bound`
 
 ## Customization and Ergonomics
 
@@ -69,11 +69,15 @@ or maybe the outline is more like
 
 ### 
 
-## Defensive Programming in Rust-Python
+## Interior mutability with PyCell
 
-### Using \_\_slots\_\_ to prevent arbitrary Python class additions
+### Also cover PyRef
 
-### Using dunders to make existing fields private
+<!-- ## Defensive Programming in Rust-Python -->
+<!---->
+<!-- ### Using \_\_slots\_\_ to prevent arbitrary Python class additions -->
+<!---->
+<!-- ### Using dunders to make existing fields private -->
 
 ## Calling Python from Rust
 
@@ -82,6 +86,11 @@ or maybe the outline is more like
 ### include external files
 
 ### include external libraries/wheels?
+not clear how to do this at present??
+
+## High-Performance Memory Patterns in Rust-Python
+
+
 
 
 ## Make PyFunctions available
