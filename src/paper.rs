@@ -1,5 +1,4 @@
 use pyo3::prelude::*;
-
 use crate::employees::Employee;
 
 /// A single sheet of paper that can be placed into the Fax-Machine/Shredder
@@ -28,68 +27,6 @@ impl Paper {
     } 
 
     pub fn contents(&self) -> String { self.contents.clone() }
-}
-
-// judgment call: do we allow signed integers and coerce them, or do we error out?
-// this is what the student is writing, they get to choose... but they can't pass all tests,
-// they've gotta side with either Michael or Dwight
-#[pymethods]
-impl Paper {
-    #[new]
-    pub fn __init__(
-        width: i32,
-        height: i32,
-        contents: String,
-    ) -> Self {
-        Paper::new(
-            PaperSize::new(
-                width.unsigned_abs(), 
-                height.unsigned_abs()
-            ), 
-            contents
-        )
-    }
-    //option 2, with the warning
-    // #[new]
-    // pub fn __init__(
-    //     width: i32,
-    //     height: i32,
-    //     contents: String,
-    // ) -> PyResult<Self> {
-    //     if width < 0 || height < 0 {
-    //         Err(PyValueError::new_err("Please stop, making negative widths"))
-    //     } else {
-    //         Ok(Paper::new(PaperSize::new(width.unsigned_abs(), height.unsigned_abs()), contents))
-    //     }
-    // }
-
-    pub fn __repr__(&self) -> String { self.contents.clone() }
-
-    /// adding these papers to the inbox of these employees
-    /// defaults to sending to everyone in the office
-    #[pyo3(signature = (employees, emails_opt=None))]
-    pub fn fax(&self, employees: Vec<Bound<'_, Employee>>, emails_opt: Option<Vec<String>>) {
-        if let Some(emails) = emails_opt { 
-            // if emails are specified, just send to those employees
-            for employee_handle in employees {
-
-                // we borrow the Rust struct *inside* the Python object mutably
-                let mut employee_ref = employee_handle.borrow_mut();
-                if emails.contains(&employee_ref.email()) { 
-                    // Perform the mutation
-                    employee_ref.send(self.clone());
-                } 
-            }
-        } else {
-            for employee_handle in employees {
-                // We borrow the Rust struct *inside* the Python object mutably
-                let mut employee_ref = employee_handle.borrow_mut();
-                
-                // Perform the mutation
-                employee_ref.send(self.clone());
-            }
-        }
-    } 
 }
 
 

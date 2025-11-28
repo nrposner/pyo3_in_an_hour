@@ -6,7 +6,6 @@ use crate::paper::Paper;
 
 type DunderMifflinId = u32;
 
-#[pyclass]
 #[derive(Clone)]
 pub struct Employee { 
     id: DunderMifflinId,
@@ -30,22 +29,8 @@ impl Employee {
         self.inbox.insert(paper.contents());
     }
     pub fn id(&self) -> u32 { self.id }
-    // pub fn name(&self) -> String { self.name.clone() }
-    // pub fn email(&self) -> String { self.email.clone() }
-    pub fn notes(&self) -> String { self.michaels_notes.clone() }
-}
-
-
-#[pymethods]
-impl Employee {
-    #[new]
-    pub fn __init__(id: u32, name: String, email: String, michaels_notes: String) -> Self { 
-        Employee::new(id, name, &email, &michaels_notes) 
-    }
-    pub fn inbox(&self) -> HashSet<String> {
-        self.inbox.clone()
-    }
     pub fn name(&self) -> String { self.name.clone() }
     pub fn email(&self) -> String { self.email.clone() }
+    pub fn notes(&self) -> String { self.michaels_notes.clone() }
 }
 
