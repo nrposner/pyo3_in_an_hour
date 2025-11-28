@@ -1,112 +1,34 @@
+# Rust-Python in 1 Hour
+## Introduction to Rust-Python Interop with PyO3
 
-Structure
+Welcome! If you're reading this, you're either attending the RustNYC 2025 Unconference, or you're following along with this workshop independently. Either way, I'm glad to have you!
 
+This workshop is a guided introduction to interoperation between Rust and Python programs using `PyO3` bindings and the `maturin` build system. It is intended for people comfortable with the Rust programming language and at least some experience with Python.
 
-Put up link to repo and things to download and have ready (a recent version of rustc and cargo, a recent version of the Python interpreter, and then install pyo3 and maturin).
+## Structure
 
-Leave that up on the following slides to make sure people can continue to follow them??
+This repository is structured as follows:
+- A `src/` directory containing the base Rust code
+- An `exercises/` directory containing the explanations and instructions for each section
+- A `python/` directory containing the test cases for each section
+- More detailed explanations of certain topics in the `reading/` directory
 
-A few slides on why Python-Rust interop
+### Setup
+To work through the directory, please follow these steps:
+1. `git clone` this repostory to your local environment.
+2. Install the following requirements locally:
+    - Rust >= v1.83
+    - Python >= 3.8
+    - the [`maturin` build system](https://www.maturin.rs/installation.html)
+    - (Recommended) `uv` for virtual environment management in Python
+3. In the cloned repository, initialize a Python virtual environment using `uv` or your tool of choice and follow these steps or their equivalents:
+    - `uv venv .venv`
+    - `source .venv.bin/activate`
+    - `uv pip install -U pip maturin`
+4. Start from `intro.md` in the `exercises/` directory, and then proceed to the first stage, `1_basics.md`.
+5. For each stage, modify the code in `src/` to pass the tests located in the `python/` directory. Build the Rust-Python code using `uv run maturin develop` (or equivalent).
+6. To run the tests for each stage, run the equivalent file in the `python` directory, e.g. `python3 python/1_basics.py`
 
-A lot of it is tool creation: Python is a very convenient environment in which to do a lot of things with a lot of tools, and recently a lot of them are being written in Rust: 
+If you're in the room live with us, feel free to ask questions and for help at any point. If you're doing this later on your own, and have further questions, please raise Issues on this repository, or direct questions to nicolasposner@gmail.com.
 
-
-
-polars supplanting pandas, qdrant supplanting pyspark??
-
-uv replacing basically the entire Python environment ecosystem, and thank god for that
-
-
-And on top of that, the recent Pre-PEP to start introducing Rust into CPython. 
-That, and the NumPy maintainers are started to rumble in the same direction.
-
-Rust is here, and it's here to stay. It's a great time to get into Rust-Python interop.
-
-
-Today's workshop is going to introduce Rust-Python interop using PyO3. It's not the only option, and if you're doing low-level interoperation like adding Rust into CPython or NumPy, you'll need to get a little more hands on. But for 95% of cases, it's the right choice: PyO3 lets you bind Rust and Python code very simply and distribute it just as easily.
-
-
-
-
-# Sections
-
-## Intro: Who you are
-
-## Make PyClasses available
-And discuss common patterns and pitfalls: if you're in this room, chances are you're familiar with the deficiencies of object-oriented design patterns. Just because you CAN use classes, doesn't mean you should use them for everything!
-
-Also note that, even though the pyclass is a struct on your end, it acts like a regular Python class on the other end, which means it can be near-arbitrarily modified.
-
-Use `__x` instead of `x` for the names of fields to prevent their arbitrary modification, and then provide getters for the same.
-
-Also use __slots__ to prevent arbitrary addition of fields
-
-With this, you can mostly replicate the experience of using structs in Python
-
-
-Actually, one of the later challenges should be Dwight trying to just arbitrarily change pyclass contents, and you need to stop him from doing that.
-
-
-or maybe the outline is more like
-
-## Basics
-
-### PyClasses
-
-### Pyfunctions
-
-### Mutation of Python-side data with `Bound`
-
-## Customization and Ergonomics
-
-### Python-side ergonomics
-
-### Display/Debug with __str__ and __repr__
-
-### Iteration
-
-### Containment
-
-### 
-
-## Interior mutability with PyCell
-
-### Also cover PyRef
-
-<!-- ## Defensive Programming in Rust-Python -->
-<!---->
-<!-- ### Using \_\_slots\_\_ to prevent arbitrary Python class additions -->
-<!---->
-<!-- ### Using dunders to make existing fields private -->
-
-## Calling Python from Rust
-
-### Raw inline Python
-
-### include external files
-
-### include external libraries/wheels?
-not clear how to do this at present??
-
-## High-Performance Memory Patterns in Rust-Python
-
-
-
-
-## Make PyFunctions available
-
-## Customize PyClasses with dunder methods for ergonomics
-
-## Call Python from Rust!
-
-## Optimize Python-Rust memory calls 
-??
-
-
-
-
-
-
-
-
-
+Good luck, and have fun!
