@@ -1,4 +1,4 @@
-use pyo3::prelude::*;
+use pyo3::{prelude::*, exceptions::PyValueError};
 
 use crate::employees::Employee;
 
@@ -35,33 +35,33 @@ impl Paper {
 // they've gotta side with either Michael or Dwight
 #[pymethods]
 impl Paper {
-    #[new]
-    pub fn __init__(
-        width: i32,
-        height: i32,
-        contents: String,
-    ) -> Self {
-        Paper::new(
-            PaperSize::new(
-                width.unsigned_abs(), 
-                height.unsigned_abs()
-            ), 
-            contents
-        )
-    }
-    //option 2, with the warning
     // #[new]
     // pub fn __init__(
     //     width: i32,
     //     height: i32,
     //     contents: String,
-    // ) -> PyResult<Self> {
-    //     if width < 0 || height < 0 {
-    //         Err(PyValueError::new_err("Please stop, making negative widths"))
-    //     } else {
-    //         Ok(Paper::new(PaperSize::new(width.unsigned_abs(), height.unsigned_abs()), contents))
-    //     }
+    // ) -> Self {
+    //     Paper::new(
+    //         PaperSize::new(
+    //             width.unsigned_abs(), 
+    //             height.unsigned_abs()
+    //         ), 
+    //         contents
+    //     )
     // }
+    //option 2, with the warning
+    #[new]
+    pub fn __init__(
+        width: i32,
+        height: i32,
+        contents: String,
+    ) -> PyResult<Self> {
+        if width < 0 || height < 0 {
+            Err(PyValueError::new_err("Please stop, making negative widths"))
+        } else {
+            Ok(Paper::new(PaperSize::new(width.unsigned_abs(), height.unsigned_abs()), contents))
+        }
+    }
 
     pub fn __repr__(&self) -> String { self.contents.clone() }
 
