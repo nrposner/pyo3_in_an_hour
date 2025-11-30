@@ -1,4 +1,4 @@
-use pyo3::prelude::*;
+use pyo3::{prelude::*, exceptions::PyValueError};
 use crate::employees::Employee;
 
 /// A single sheet of paper that can be placed into the Fax-Machine/Shredder
