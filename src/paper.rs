@@ -1,4 +1,4 @@
-use pyo3::{prelude::*, exceptions::PyValueError};
+use pyo3::{exceptions::{PyIndexError, PyValueError}, prelude::*};
 
 use crate::employees::Employee;
 
@@ -57,7 +57,7 @@ impl Paper {
         contents: String,
     ) -> PyResult<Self> {
         if width < 0 || height < 0 {
-            Err(PyValueError::new_err("Please stop, making negative widths"))
+            Err(PyValueError::new_err("Please, stop making negative widths"))
         } else {
             Ok(Paper::new(PaperSize::new(width.unsigned_abs(), height.unsigned_abs()), contents))
         }
@@ -89,7 +89,33 @@ impl Paper {
                 employee_ref.send(self.clone());
             }
         }
-    } 
+    }
+    fn __len__(&self) -> usize {
+        self.contents.split_whitespace().collect::<Vec<&str>>().len()
+    }
+    fn __contains__(&self, key: String) -> bool {
+        let contents = self.contents();
+        let words: Vec<&str> = contents.split_whitespace().collect();
+
+        words.iter().any(|word| {
+            *word == key
+        })
+    }
+    fn __getitem__(&self, idx: i64) -> PyResult<String> {
+        let contents: Vec<&str> = self.contents.split_whitespace().collect();
+        let len = contents.len();
+
+        let mut actual_index = idx;
+
+        if actual_index < 0 {
+            actual_index += len as i64
+        }
+
+        match contents.get(actual_index as usize) {
+            Some(value) => Ok(value.to_string()),
+            None => Err(PyIndexError::new_err("contents index out of range"))
+        }
+    }
 }
 
 
