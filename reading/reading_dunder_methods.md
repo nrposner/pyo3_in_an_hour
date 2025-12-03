@@ -1,7 +1,3 @@
-Now that we've got the basics of classes and functions down, let's work on making our objects more ergonomic to use from Python.
-
-We've already seen the `__init__` dunder method used for class initialization, but there are many, many more useful methods that allow us to make `pyclass`es easy to use from Python while preserving the performance and safety benefits of a Rust implementation under the hood.
-
 A brief, *very* non-exhaustive overview of some of the most useful and common such methods follows.
 
 ## Displaying Object Information
@@ -64,40 +60,5 @@ paper[-2] # extracts the second-to-last element of paper
 
 By defining a custom `__getitem__` method that splits whitespace and returns the nth element of the contents, field, we could get those words directly instead of having to extract `.contents()` manually. 
 
-
-
-
-For this test case, go ahead and define several dunder methods on `Paper` to pass the following test cases:
-
-
-```python
-paper = Paper(6, 8, "Would I rather be feared or loved? Easy. Both. I want people to be afraid of how much they love me.")
-
-# use __contains__
-assert("love" in paper)
-
-# use __len__ to return the number of words in the contents field
-assert(len(paper)==21)
-
-# use __getitem__ to return the index elements of the contents field
-assert(paper[4]=="feared")
-assert(paper[-2]=="love")
-
-```
-
-
-
-other test cases for iter and next???
-
-or maybe this is enough
-maybe we shouldn't cover sizeof here??
-
-
-
-for paper
-str representation should be the contents themselves, 
-but the repr should be the contents, size, and other struct data, pretty-printed
-length of a paper should be the number of words in its contents
-but the sizeof of a paper should be its surface area in square inches... because reasons
 
 

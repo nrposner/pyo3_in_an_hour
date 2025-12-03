@@ -42,7 +42,3 @@ The #[new] `__init__` builder in PyO3 doesn't just support returning `Self`: it 
 PyO3 makes Python exceptions (which are divided into Warnings and Errors) available using the `pyo3::exceptions` module. `PyTypeError`, `PyValueError`, and `PyWarning` are particularly useful!
 
 
-
-
-
-

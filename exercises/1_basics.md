@@ -46,9 +46,3 @@ impl Employee {
 
 Note: since `__init__` is used for Python-side construction, this method can coexist with a Rust-native `Self::new()` constructor. They could even have totally different interfaces!
 
-
-
-
-
-
-
