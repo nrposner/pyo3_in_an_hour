@@ -14,7 +14,7 @@ def dwights_ai_decision_algorithm(paper: Paper, employees: list[Employee]) -> No
             # return [employee.email() for employee in present]
             return [employee.email() for indx,employee in enumerate(employees) if present[indx]]
         else:
-            return []
+            paper.shred()
     except Exception as e:
         print(f"Got unexpected Exception {e}")
 
@@ -23,9 +23,9 @@ def dwights_ai_decision_algorithm(paper: Paper, employees: list[Employee]) -> No
 
 def jims_ai_decision_algorithm(paper: Paper, employees: list[Employee]) -> None | list[str]:
     try: 
-        if "DO NOT SHRED" in paper.contents:
-            return []
+        if "do not shred" in paper.contents.lower():
+            paper.shred()
         else:
-            return []
+            paper.shred()
     except Exception as e:
         print(f"Got unexpected Exception {e}")

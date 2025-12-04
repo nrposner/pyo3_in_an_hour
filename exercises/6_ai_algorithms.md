@@ -63,7 +63,7 @@ def dwights_ai_decision_algorithm(paper: Paper, employees: list[Employee]) -> li
         present = employees[employee_names in paper.contents.lower()]
         return [employee.email for employee in present]
     else:
-        return []
+        paper.shred()
 ```
 
 ...
