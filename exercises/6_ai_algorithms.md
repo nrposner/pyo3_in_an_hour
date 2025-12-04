@@ -39,11 +39,9 @@ It also means that, since we can export our Rust code as a Python wheel into the
 
 ```rust
 #[pyfunction]
-pub fn test_numpycall<'py>(
+pub fn test_linspace<'py>(
     py: Python<'py>, 
 ) -> Bound<'py, PyList> {
-
-    sys.getattr(intern!(sys.py(), "linspace"));
 
     let linspace = Python::attach(|py| -> PyResult<Py<PyAny>> {
         let linspace: Py<PyAny> = PyModule::import(py, "numpy")?
@@ -65,9 +63,26 @@ pub fn test_numpycall<'py>(
 Third, we can read Python code from a local file and execute it directly: this gives us some of the convenience of the inline method while being more readable and organized.
 
 ```rust
-...
-```
+// for some python function `bar` in the python file 'scripts.py' with no output
+#[pyfunction]
+pub fn foo<'py>(
+    py: Python<'py>, 
+) {
+    let args = ...;
 
+    let script = c_str!(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/python/script.py"
+    )));
+
+    let result = Python::attach(|py| -> PyResult<()> {
+        let algos: Py<PyAny> = PyModule::from_code(py, script, c"script.py", c"")?
+            .getattr("bar")?
+            .into();
+        script.call1(py, (args))?
+    });
+}
+```
 
 With these tools, the Python-Rust Orobouros is complete, and gives us another powerful tool in our toolbelt. Not only can we provide our developers with Python tools written in Rust, but our developers can now write Python code which we can execute in Rust!
 
@@ -84,7 +99,7 @@ def dwights_ai_decision_algorithm(paper: Paper, employees: list[Employee]) -> li
         present = employees[employee_names in paper.contents.lower()]
         return [employee.email for employee in present]
     else:
-        return []
+        paper.shred()
 ```
 
 ...
@@ -94,15 +109,5 @@ DWIIIIIIIIIGHT!!!
 You know what, fine. We can work with this. 
 
 Let's make a pyfunction that can be called from Python, executed in Rust, and uses the Python code defined locally in `assets/algorithms.py`
-
-
-## Hints 
-
-...
-
-
-
-
-
 
 
