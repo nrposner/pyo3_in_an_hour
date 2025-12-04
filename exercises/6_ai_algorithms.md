@@ -38,7 +38,28 @@ A more flexible method is to import existing modules from the local environment.
 It also means that, since we can export our Rust code as a Python wheel into the local environment, we can call our own code in Python from Rust... from Python... from Rust... I haven't tried this, and don't recommend doing so, but it does seem like a new and innovative way to blow your stack.
 
 ```rust
-...
+#[pyfunction]
+pub fn test_numpycall<'py>(
+    py: Python<'py>, 
+) -> Bound<'py, PyList> {
+
+    sys.getattr(intern!(sys.py(), "linspace"));
+
+    let linspace = Python::attach(|py| -> PyResult<Py<PyAny>> {
+        let linspace: Py<PyAny> = PyModule::import(py, "numpy")?
+            .getattr("linspace")?
+            .into();
+        Ok(linspace)
+    }).unwrap();
+    
+    let list = PyList::empty(py);
+
+    for i in 0..100 {
+        let linspace_vec = linspace.call1(py, (i*10, i*100,))
+        .unwrap().extract::<PyReadonlyArray1<f64>>(py).unwrap();
+
+    //... do stuff
+}
 ```
 
 Third, we can read Python code from a local file and execute it directly: this gives us some of the convenience of the inline method while being more readable and organized.
