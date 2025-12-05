@@ -1,4 +1,3 @@
-
 from dunder_mifflin import Paper, Employee, dwights_algo, jims_algo #ty: ignore[unresolved-import]
 
 def dwights_algo_1():
@@ -16,12 +15,12 @@ def dwights_algo_1():
         res = [paper.contents in employee.inbox() for employee in employees]
 
         if res == [True, False, False, False, False]:
-            print("\n✅ CORRECT:")
+            print("✅ Test #1 Succeeded!")
             print("Fine, jeez, whatever - Dwight")
             return
         else:
-            print(f"Test #1\n❌ Failed unexpectedly. Result was expected to be [True, False, False, False, False], was found to instead be {res}.")
-            print(f"\nWhy did we mix up a fax machine with a shredder?! Whose idea was that?!")
+            print(f"❌ Test #1 Failed unexpectedly. Result was expected to be [True, False, False, False, False], was found to instead be {res}.")
+            print(f"\nWhy did we mix up a fax machine with a shredder?! Whose idea was that?! - Michael")
 
     except Exception as e:
         print(f"Test #1\n❌ Received Exception {e}.")
@@ -42,15 +41,15 @@ def dwights_algo_2():
         res = [paper.contents in employee.inbox() for employee in employees]
 
         if res == [False, False, False, False, False]:
-            print("\n✅ CORRECT:")
+            print("✅ Test #2 Succeeded!")
             print("What? You didn't say not to shred it - Dwight")
             return
         else:
-            print(f"Test #2\n❌ Failed unexpectedly. Result was expected to be [False, False, False, False, False], was found to instead be {res}.")
+            print(f"❌ Test #2 Failed unexpectedly. Result was expected to be [False, False, False, False, False], was found to instead be {res}.")
             print(f"\nReally, Dwight? Really? - Michael")
 
     except Exception as e:
-        print(f"Test #2\n❌ Received Exception {e}.")
+        print(f"❌ Test #2 Failed: Received Exception {e}.")
 
 def jims_algo_3():
     try:
@@ -67,15 +66,15 @@ def jims_algo_3():
         res = [paper.contents in employee.inbox() for employee in employees]
 
         if res == [False, False, False, False, False]:
-            print("\n✅ CORRECT:")
+            print("✅ Test #3 Succeeded!")
             print("Can't give us more work if the work isn't delivered - Jim")
             return
         else:
-            print(f"Test #3\n❌ Failed unexpectedly. Result was expected to be [False, False, False, False, False], was found to instead be {res}.")
+            print(f"❌Test #3 Failed unexpectedly. Result was expected to be [False, False, False, False, False], was found to instead be {res}.")
             print(f"\nWhere did this week's work assignments go? - Michael")
 
     except Exception as e:
-        print(f"Test #3\n❌ Received Exception {e}.")
+        print(f"❌Test #3 Failed: Received Exception {e}.")
 
 if __name__ == "__main__":
     dwights_algo_1()

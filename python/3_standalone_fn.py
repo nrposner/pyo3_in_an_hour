@@ -11,21 +11,17 @@ def michael_search_1():
         )
 
         results = search_paper(p, ["score", "Michael"])
-        print(results)
+        # print(results)
 
         assert(results == [True, False])
 
-        print("Test #1 Succeeded Correctly\n✅")
+        print("✅ Test #1 Succeeded Correctly!")
         print("I think the employees look up to me as a leader - Michael")
     except AssertionError as ae:
-        print(f"Test #1\n❌ Received AssertionError{ae}. \nConsider checking the output of `result`")
+        print(f"❌ Test #1 Failed: Received AssertionError{ae}. \nConsider checking the output of `result`")
         print(f"\nWhere... this isn't my speech... - Michael")
     except Exception as e:
         print(f"Got unexpected exception {e}")
-
-if __name__ == "__main__":
-    michael_search_1()
-
 
 def pam_search_2():
     try:
@@ -35,14 +31,14 @@ def pam_search_2():
         )
 
         results = search_paper(p, ["dunder", "Michael"], any=True)
-        print(results)
+        # print(results)
 
         assert(results == [True])
 
-        print("Test #1 Succeeded Correctly\n✅")
+        print("✅Test #2 Succeeded Correctly!")
         print("Who in the world reads this stuff? - Pam")
     except AssertionError as ae:
-        print(f"Test #1\n❌ Received AssertionError{ae}. \nConsider checking the output of `result`")
+        print(f"❌Test #2 Failed: Received AssertionError{ae}. \nConsider checking the output of `result`")
         print(f"\nCome on, work you stupid machine - Pam")
     except Exception as e:
         print(f"Got unexpected exception {e}")
