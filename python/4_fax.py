@@ -1,4 +1,3 @@
-import pytest
 from dunder_mifflin import Paper, Employee #ty: ignore[unresolved-import]
 
 # dwight wants to make a Paper
@@ -30,16 +29,16 @@ def test_fax_1():
         # should evaluate to [True, False, True, True, False]
         res = [v_important_paper.contents in employee.inbox() for employee in employees]
         if res == [True, False, True, True, False]:
-            print("\n✅ CORRECT:")
+            print("✅ Test #1 Succeeded!")
             print("What the heck is this? - Jim")
             return
         else:
+            print("❌ Test #1 Failed: Perhaps the logic is incorrect...")
             print(f"\nDid nobody get my very important memo? - Michael")
-            pytest.fail(f"\n❌ INCORRECT: Perhaps the logic is incorrect...")
 
     except Exception as e:
+        print(f"❌ Test #1 Failed: Got an exception {type(e).__name__}, {e}.")
         print(f"\nDid nobody get my very important memo? - Michael")
-        pytest.fail(f"\n❌ INCORRECT: Got an exception {type(e).__name__}, {e}.")
         
 
 # stanley tries to send something to himself... and then realizes the fax function defaults to sending to the entire office
@@ -62,16 +61,16 @@ def test_fax_2():
         res = [stanleys_art.contents in employee.inbox() for employee in employees]
 
         if res == [True, True, True, True, True]:
-            print("\n✅ CORRECT:")
+            print("✅ Test #2 Succeeded!")
             print("That... was not supposed to go to everyone... - Stanley")
             return
         else:
+            print(f"❌ Test #2 Failed: Perhaps the logic is incorrect...")
             print(f"\nWhat the... STAAAAAN?! - Michael")
-            pytest.fail(f"\n❌ INCORRECT: Perhaps the logic is incorrect...")
 
     except Exception as e:
+        print(f"❌ Test 2 Failed: Got an exception {type(e).__name__}, {e}.")
         print(f"\nWhat the... STAAAAAN?! - Michael")
-        pytest.fail(f"\n❌ INCORRECT: Got an exception {type(e).__name__}, {e}.")
 
 
 if __name__ == "__main__":

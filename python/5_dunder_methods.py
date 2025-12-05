@@ -6,11 +6,10 @@ def len_test():
 
         assert(len(paper)==21)
 
-        print(f"\nTest #1 Succeeded\n ✅")
-        print("See? I told you it would work! - Dwight")
+        print(f"✅ Test #1 Succeeded")
+        print("This is not what I planned to do with my life. - Stanley")
     except Exception as e:
-        print("\nTest #1 Failed\n ❌")
-        print(e)
+        print(f"❌ Test #1 Failed: Received unexpected exception {e}")
 
 def contains_test():
     try:
@@ -18,11 +17,10 @@ def contains_test():
 
         assert("love" in paper)
 
-        print(f"\nTest #2 Succeeded!\n ✅")
-        print("See? I told you it would work! - Dwight")
+        print(f"✅ Test #2 Succeeded!")
+        print("I'm going for a smoke - Pam")
     except Exception as e:
-        print("\nTest #2 Failed\n ❌")
-        print(e)
+        print(f"❌ Test #2 Failed: Received unexpected exception {e}")
 
 
 def getitem_test_1():
@@ -30,13 +28,11 @@ def getitem_test_1():
         paper = Paper(6, 8, "Would I rather be feared or loved? Easy. Both. I want people to be afraid of how much they love me.")
 
         assert(paper[4]=="feared")
-        assert(paper[-2]=="love")
 
-        print(f"\nTest #3 Succeeded\n ✅")
-        print("See? I told you it would work! - Dwight")
+        print(f"✅ Test #3 Succeeded")
+        print("Fear will keep them in line. Fear, and donuts - Michael")
     except Exception as e:
-        print("\nTest #3 Failed\n ❌")
-        print(e)
+        print(f"❌Test #3 Failed: Received unexpected exception {e}")
 
 def getitem_test_2():
     try:
@@ -44,10 +40,10 @@ def getitem_test_2():
 
         assert(paper[-2]=="love")
 
-        print(f"\nTest #4 Succeeded\n ✅")
-        print("See? I told you it would work! - Dwight")
+        print(f"✅ Test #4 Succeeded")
+        print("I always related to Machiavelli - Dwight")
     except Exception as e:
-        print("\nTest #3 Failed\n ❌")
+        print(f"❌Test #4 Failed: Received unexpected exception {e}")
         print(e)
 if __name__ == "__main__":
     len_test()
